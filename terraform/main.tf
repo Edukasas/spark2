@@ -1,12 +1,12 @@
+# Setup azurerm as a state backend
 terraform {
   backend "azurerm" {
   }
 }
 
+# Configure the Microsoft Azure Provider
 provider "azurerm" {
-  version = "~> 2.62.0"
-  features {
-  }
+  features {}
 }
 
 data "azurerm_client_config" "current" {}
