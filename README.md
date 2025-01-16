@@ -1,6 +1,8 @@
 * Add your code in `src/main/` if needed
 * Test your code with `src/tests/` if needed
 * Modify notebooks for your needs
+* Create Storage account in Azure for tfstate file
+* Fill in Terraform backend configuration in main.tf
 * Deploy infrastructure with terraform
 ```
 terraform init
