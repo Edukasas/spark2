@@ -1,9 +1,9 @@
 # Setup azurerm as a state backend
 terraform {
   backend "azurerm" {
-    resource_group_name  = ""
-    storage_account_name = "" # Provide Storage Account name, where Terraform Remote state is stored
-    container_name       = ""
+    resource_group_name  = "<RESOURCE_GROUP_NAME>"
+    storage_account_name = "<STORAGE_ACCOUNT_NAME>" # Provide Storage Account name, where Terraform Remote state is stored
+    container_name       = "<CONTAINER_NAME>"
     key                  = "bdcc.tfstate"
   }
 }
@@ -11,6 +11,7 @@ terraform {
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
   features {}
+  subscription_id = "<SUBSCRIPTION_ID>"
 }
 
 data "azurerm_client_config" "current" {}
@@ -20,7 +21,7 @@ resource "azurerm_resource_group" "bdcc" {
   location = var.LOCATION
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   tags = {
@@ -46,7 +47,7 @@ resource "azurerm_storage_account" "bdcc" {
   }
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   tags = {
@@ -63,7 +64,7 @@ resource "azurerm_storage_data_lake_gen2_filesystem" "gen2_data" {
   storage_account_id = azurerm_storage_account.bdcc.id
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
