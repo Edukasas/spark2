@@ -1,9 +1,4 @@
-## 1. Setup local project
-  - Add your code in `src/main/` if needed
-  - Test your code with `src/tests/` if needed
-  - Modify notebooks for your needs
-
-## 2. Create a Storage Account in Azure for Terraform State
+## 1. Create a Storage Account in Azure for Terraform State
 Terraform requires a remote backend to store its state file. Follow these steps:
 
 ### **Option 1: Using Azure Portal (Web UI)**
@@ -48,7 +43,7 @@ Terraform requires a remote backend to store its state file. Follow these steps:
    az storage container create --name <CONTAINER_NAME> --account-name <STORAGE_ACCOUNT_NAME>
    ```
 
-## 3. Get Your Azure Subscription ID
+## 2. Get Your Azure Subscription ID
 
 ### **Option 1: Using Azure Portal (Web UI)**
 1. **Go to [Azure Portal](https://portal.azure.com/)**
@@ -62,7 +57,7 @@ Retrieve it using Azure CLI:
 az account show --query id --output tsv
 ```
 
-## 4. Update Terraform Configuration
+## 3. Update Terraform Configuration
 Modify `main.tf` and replace placeholders with your actual values.
 
 - **Edit the backend block in `main.tf`:**
@@ -81,7 +76,7 @@ Modify `main.tf` and replace placeholders with your actual values.
   }
   ```
 
-## 5. Deploy Infrastructure with Terraform
+## 4. Deploy Infrastructure with Terraform
 Run the following Terraform commands:
 
 ```bash
@@ -90,7 +85,7 @@ terraform plan -out terraform.plan
 terraform apply terraform.plan
 ```
 
-## 6. Verify Resource Deployment in Azure
+## 5. Verify Resource Deployment in Azure
 After Terraform completes, verify that resources were created:
 
 1. **Go to the [Azure Portal](https://portal.azure.com/)**
@@ -103,9 +98,9 @@ az resource list --output table
 az resource list --resource-group <RESOURCE_GROUP_NAME> --output table
 ```
 
-## 7. Launch notebooks on Databricks cluster
+## 6. Launch notebooks on Databricks cluster
 
-## 8. Destroy Infrastructure (Optional)
+## 7. Destroy Infrastructure (Optional)
 To remove all deployed resources, run:
 ```bash
 terraform destroy
