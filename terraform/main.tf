@@ -14,10 +14,16 @@ provider "azurerm" {
   subscription_id = "<SUBSCRIPTION_ID>"
 }
 
+resource "random_string" "suffix" {
+  length  = 4
+  special = false
+  upper   = false
+}
+
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_resource_group" "bdcc" {
-  name     = "rg-${var.ENV}-${var.LOCATION}"
+  name     = "rg-${var.ENV}-${var.LOCATION}-${random_string.suffix.result}"
   location = var.LOCATION
 
   lifecycle {
@@ -34,7 +40,7 @@ resource "azurerm_storage_account" "bdcc" {
   depends_on = [
   azurerm_resource_group.bdcc]
 
-  name                     = "st${var.ENV}${var.LOCATION}"
+  name                     = "st${var.ENV}${var.LOCATION}${random_string.suffix.result}"
   resource_group_name      = azurerm_resource_group.bdcc.name
   location                 = azurerm_resource_group.bdcc.location
   account_tier             = "Standard"
@@ -73,7 +79,7 @@ resource "azurerm_databricks_workspace" "bdcc" {
     azurerm_resource_group.bdcc
   ]
 
-  name                = "dbw-${var.ENV}-${var.LOCATION}"
+  name                = "dbw-${var.ENV}-${var.LOCATION}-${random_string.suffix.result}"
   resource_group_name = azurerm_resource_group.bdcc.name
   location            = azurerm_resource_group.bdcc.location
   sku                 = "standard"
