@@ -16,7 +16,8 @@ build/
 .DS_Store
 
 # Local .terraform directories
-**/.terraform/*
+/terraform
+main.tf
 
 # .tfstate files
 *.tfstate
@@ -52,3 +53,5 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+.env
